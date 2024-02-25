@@ -366,3 +366,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+#other files
+launch.json
+tasks.json
+cse212-projects.sln
