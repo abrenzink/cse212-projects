@@ -15,7 +15,7 @@ public static class Sorting {
         Console.Out.WriteLine("int[]{{{0}}}", string.Join(", ", numbers)); //int[]{1, 2, 3, 4, 6, 8, 9}
     }
 
-    private static void SortArray(int[] data) {
+    private static void SortArray(int[] data) { // it's quadratic to me, n*n -------->  O(n^2)
         for (var sortPos = data.Length - 1; sortPos >= 0; sortPos--) {
             for (var swapPos = 0; swapPos < sortPos; ++swapPos) {
                 if (data[swapPos] > data[swapPos + 1]) {
