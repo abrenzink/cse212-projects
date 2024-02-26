@@ -39,9 +39,9 @@ public static class ArraysTester {
         double[] multiples = new double[length]; // index 0 to lenght-1
 
         // a for loop will be executed the same number of times as the requested number of multiples
-        // or 1 to lenght
+        // or 1 until the lenght or the array
         for(int i = 1; i <= length; i++){
-            // the element index = i receive the number multiple, which will be number * i
+            // the element index = i receive the multiple of the number, which will be number * i
             multiples[i - 1] = number * i;
         }
 
@@ -59,22 +59,27 @@ public static class ArraysTester {
     private static void RotateListRight(List<int> data, int amount)
     {
         // TODO Problem 2 Start
-
         // new rotated array will store the rotated list
         List<int> rotatedArray = new List<int>();
 
-        // determine where the rotated list will start based on the index of the original list
-        // the index is the range of the original list - the amount to be rotated 
+        /* 
+            the rotated list will have as its first element the element of the original list with
+            index = original list size less the amount of numbers to be rotated
+        */
         int startIndex = data.Count - amount; 
 
-        // start the iteration from the start index and stop at the end of the original list
+        /* 
+            start the iteration from the start index and stop at the end of the original list.
+            store those values in the rotated list. This will make the first values in the rotated list
+            be the amount of elements required to be rotaded
+        */
         for (int i = startIndex; i < data.Count; i++){
             // get the value from the original list and store in the rotated list
             int value = data[i];
             rotatedArray.Add(value);
         }
 
-        // get the values left from the original list and store in the rotated list
+        // get the values left from the original list and store in the rotated list.
         for (int j = 0; j < startIndex; j++){
             // get the values until the star index
             int value = data[j];
