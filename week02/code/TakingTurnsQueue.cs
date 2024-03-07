@@ -34,11 +34,18 @@ public class TakingTurnsQueue {
             Console.WriteLine("No one in the queue.");
         else {
             Person person = _people.Dequeue();
-            if (person.Turns > 1) {
-                person.Turns -= 1;
-                _people.Enqueue(person);
+            if (person.Turns <= 0) {
+                _people.Enqueue(person); // it turns is less or equal zero just whe the
+                                            // person is dequeued, then it should have infinite number of turns. Just enqueue it.
             }
-
+            else {
+                person.Turns -= 1; // if person does not have 0 or less turns just when enqueued
+                                    // we make a new analysis
+                if(person.Turns > 0){
+                _people.Enqueue(person); // after subteacting 1, if turns is more than zero, then enqueue
+                }
+            }
+            
             Console.WriteLine(person.Name);
         }
     }

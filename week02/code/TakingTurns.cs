@@ -15,7 +15,9 @@
         // Console.WriteLine(players);    // This can be un-commented out for debug help
         while (players.Length > 0)
             players.GetNextPerson();
-        // Defect(s) Found: 
+        // Defect(s) Found: code is not alternating people/turns. Each person "uses" its turn until
+        // there are no turns left, and then goes to the next person. It also seems to dequeue the last 
+        // person in the queue, not the first. It acts as FILO, and should act as FIFO.
 
         Console.WriteLine("---------");
 
@@ -38,7 +40,9 @@
         while (players.Length > 0)
             players.GetNextPerson();
 
-        // Defect(s) Found: 
+        // Defect(s) Found: Yet code is not alternating persons' turns. After running 5 times
+        // and adding George, George "spent" his three turns, followed by 3 turns left for Tim, 
+        // finalizing with 2 of Bob's turns. What seems to be correct is the number of turns. 
 
         Console.WriteLine("---------");
 
@@ -56,7 +60,8 @@
             players.GetNextPerson();
             // Console.WriteLine(players);
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: Script did not set Tim to an infinite number of turns. The code again
+        // did not alternate turns beggining for the first to be enqueued.
 
         Console.WriteLine("---------");
 
@@ -73,7 +78,8 @@
             players.GetNextPerson();
             // Console.WriteLine(players);
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: Tim was supposed to have never-ending turns this time. However,
+        // he showed up only once. Yet the script is not alternating people.
 
         Console.WriteLine("---------");
 
@@ -83,6 +89,6 @@
         Console.WriteLine("Test 5");
         players = new TakingTurnsQueue();
         players.GetNextPerson();
-        // Defect(s) Found:
+        // Defect(s) Found: passed the test.
     }
 }
