@@ -11,11 +11,17 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: FIFO - first customer to enter should be the first to be served. 
+        // Create a CustService with 5 size. Add Anna, Chris, Betty
+        // Expected Result: Anna should be the firt one to show up
         Console.WriteLine("Test 1");
+        var service = new CustomerService(5);
+        service.AddNewCustomer();
+        service.AddNewCustomer();
+        service.AddNewCustomer();
+        service.ServeCustomer();
 
-        // Defect(s) Found: 
+        // Defect(s) Found: first Customer to be entered in was not the first served. The second one was popping. 
 
         Console.WriteLine("=================");
 
@@ -23,8 +29,13 @@ public class CustomerService {
         // Scenario: 
         // Expected Result: 
         Console.WriteLine("Test 2");
+        var service2 = new CustomerService(0);
 
-        // Defect(s) Found: 
+        for(int i = 0; i < 12; i++){
+            service2.AddNewCustomer();
+        }
+
+        // Defect(s) Found: None.
 
         Console.WriteLine("=================");
 
@@ -67,7 +78,9 @@ public class CustomerService {
     /// </summary>
     private void AddNewCustomer() {
         // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+        // if (_queue.Count > _maxSize) {
+        if (_queue.Count >= _maxSize) {
+
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
         }
@@ -88,9 +101,12 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
+        // _queue.RemoveAt(0); ------->  the firts cust was being removed, resulting in the second one being stored in var customer.
         var customer = _queue[0];
+        Console.WriteLine("------");
+        Console.WriteLine("Next cust to be helped:");
         Console.WriteLine(customer);
+        _queue.RemoveAt(0);
     }
 
     /// <summary>
