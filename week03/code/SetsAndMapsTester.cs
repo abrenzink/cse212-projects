@@ -172,7 +172,31 @@ public static class SetsAndMapsTester {
     /// #############
     private static bool IsAnagram(string word1, string word2) {
         // Todo Problem 3 - ADD YOUR CODE HERE
-        return false;
+        word1 = word1.Replace(" ", "").ToLower();
+        word2 = word2.Replace(" ", "").ToLower();
+
+        if(word1.Length != word2.Length)
+            return false;
+
+        var countWords = new Dictionary<char, int>();
+
+        foreach(char l in word1){
+            if(!countWords.ContainsKey(l))
+                countWords.Add(l, 1);
+            else
+                countWords[l] += 1;
+        }
+
+        foreach(char l in word2){
+            if(!countWords.ContainsKey(l))
+                return false;
+            countWords[l] -= 1;
+
+            if(countWords[l] < 0)
+                return false;
+        }
+
+        return true;
     }
 
     /// <summary>
