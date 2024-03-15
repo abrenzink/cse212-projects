@@ -141,6 +141,11 @@ public static class SetsAndMapsTester {
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
+            string degree = fields[3];
+            if(!degrees.ContainsKey(degree))
+                degrees.Add(degree, 1);
+            else
+                degrees[degree] += 1;
         }
 
         return degrees;
