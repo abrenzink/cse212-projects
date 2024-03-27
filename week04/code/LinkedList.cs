@@ -136,7 +136,7 @@ public class LinkedList : IEnumerable<int> {
                 else {
                     curr.Next!.Prev = curr.Prev;                    
                     curr.Prev!.Next = curr.Next; 
-                    curr = null;                  
+                    curr = null;  
                 }
 
                 return; // We can exit the function after we insert
