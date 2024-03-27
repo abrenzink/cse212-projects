@@ -125,16 +125,18 @@ public class LinkedList : IEnumerable<int> {
         Node? curr = _head;
         while (curr is not null) {
             if (curr.Data == value) {
-                // If the location of 'value' is at the end of the list,
-                // then we can call remove_tail to remove 'value'
-                if (curr == _tail) {
-                    RemoveTail(value);
+                if (curr == _head){
+                    RemoveHead();
+                }
+                else if (curr == _tail) {
+                    RemoveTail();
                 }
                 // For any other location of 'value', need to remove 
                 // the node and reconnect the links to remove.
                 else {
-                    curr.Prev = 
-                    curr.Data = null;
+                    curr.Next!.Prev = curr.Prev;                    
+                    curr.Prev!.Next = curr.Next; 
+                    curr = null;  
                 }
 
                 return; // We can exit the function after we insert
@@ -149,6 +151,13 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void Replace(int oldValue, int newValue) {
         // TODO Problem 4
+        Node? curr = _head;
+        while (curr != null) {
+            if (curr.Data == oldValue) {
+                curr.Data = newValue;
+            }
+            curr = curr.Next; // Go to the next node to search for 'value'
+        }
     }
 
     /// <summary>
