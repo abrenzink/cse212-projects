@@ -171,14 +171,11 @@ public static class RecursionTester {
     /// </summary>
     public static void PermutationsChoose(string letters, int size, string word = "") {
         // TODO Start Problem 2
-        // Try adding each of the available letters
+        // Add each of the available letters
         // to the 'word' and add up all the
-        // resulting permutations.
-        if (letters.Length == 0)
-        {
-            Console.WriteLine(word);
-        }
-        else if(word.Length == size){
+        // resulting permutations when the number
+        // of letters in word = size.
+        if(word.Length == size){
             Console.WriteLine(word);
         }
         else
