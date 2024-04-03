@@ -271,8 +271,22 @@ public static class RecursionTester {
     /// Using recursion, display all possible binary strings for a given pattern.  You might find 
     /// some of the string functions like IndexOf and [..X] / [X..] to be useful in solving this problem.
     /// </summary>
-    public static void WildcardBinary(string pattern) {
-        // TODO Start Problem 4
+    public static void WildcardBinary(string pattern, string current = "") {
+        // TODO Start Problem 4        
+        // Base case: if pattern contains no wildcard
+        if (!pattern.Contains("*"))
+        {
+            Console.WriteLine(current + pattern);
+        }
+        else
+        {
+            // Find the first occurrence of *
+            int wildcardIndex = pattern.IndexOf("*");
+
+            // Recurse for both possibilities: replacing * with 0 and 1
+            WildcardBinary(pattern.Substring(0, wildcardIndex) + "0" + pattern.Substring(wildcardIndex + 1), current);
+            WildcardBinary(pattern.Substring(0, wildcardIndex) + "1" + pattern.Substring(wildcardIndex + 1), current);
+        }
     }
 
     /// <summary>
