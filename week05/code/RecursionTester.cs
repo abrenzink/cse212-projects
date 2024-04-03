@@ -176,17 +176,27 @@ public static class RecursionTester {
     /// </summary>
     public static void PermutationsChoose(string letters, int size, string word = "") {
         // TODO Start Problem 2
-        for(int i = 0; i < size; i++){
-            Console.WriteLine($"{letters[i]}");
+        // for(int i = 0; i < size; i++){
+        //     Console.WriteLine($"{letters[i]}");
+        // }
+        // if(letters.Length <= 2 || size <= 1){
+        //     Console.WriteLine($"letters[0] letters[1]");            
+        // }
+        // else {
+        //     (letters.Length * PermutationsChoose(letters, size)) / (letters.Length - size);
+        //}
+
+        if (size == 0)
+        {
+            Console.WriteLine(word);
+            return;
         }
-        if(letters.Length <= 2 || size <= 1){
-            // Console.WriteLine($"letters[0] letters[1]");
-            
+
+        for (int i = 0; i < letters.Length; i++)
+        {
+            // Recursively calls the function with a letter removed from 'letters' and added to 'word'.
+            PermutationsChoose(letters.Substring(0, i) + letters.Substring(i + 1), size - 1, word + letters[i]);
         }
-        else {
-            
-            // (letters.Length * PermutationsChoose(letters, size)) / (letters.Length - size) * 
-        }
     }
 
     /// <summary>
@@ -235,19 +245,32 @@ public static class RecursionTester {
     /// until the memoization is implemented.
     /// </summary>
     public static decimal CountWaysToClimb(int s, Dictionary<int, decimal>? remember = null) {
+        if (remember == null)
+        {
+            remember = new Dictionary<int, decimal>();
+        }
+
         // Base Cases
         if (s == 0)
-            return 0;
+            return 1; // If there are no steps to climb, there is 1 way to climb it (no need to climb).
         if (s == 1)
-            return 1;
+            return 1; // If there is 1 step, there is only 1 way to climb it (by taking 1 step).
         if (s == 2)
-            return 2;
+            return 2; // If there are 2 steps, there are 2 ways to climb it (by taking 1 step twice or 2 steps at once).
         if (s == 3)
-            return 4;
+            return 4; // If there are 3 steps, there are 4 ways to climb it (1+1+1, 1+2, 2+1, 3).
+
+        // Check if the result for 's' is already calculated and stored in the dictionary
+        if (remember.ContainsKey(s))
+            return remember[s];
 
         // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
-        return ways;
+        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
+
+        // Store the result in the dictionary for future use
+        remember[s] = ways;
+
+        return ways;
     }
 
     /// <summary>
