@@ -171,28 +171,18 @@ public static class RecursionTester {
     /// </summary>
     public static void PermutationsChoose(string letters, int size, string word = "") {
         // TODO Start Problem 2
-        // Add each of the available letters
-        // to the 'word' and add up all the
-        // resulting permutations when the number
-        // of letters in word = size.
-        if(word.Length == size){
-            Console.WriteLine(word);
+        for(int i = 0; i < size; i++){
+            Console.WriteLine($"{letters[i]}");
         }
-        else
-        {
-            for (var i = 0; i < letters.Length; i++)
-            {
-                // Make a copy of the letters to pass to the
-                // the next call to permutations.  We need
-                // to remove the letter we just added before
-                // we call permutations again.
-                var lettersLeft = letters.Remove(i, 1);
-
-                // Add the new letter to the word we have so far
-                PermutationsChoose(lettersLeft, size, word + letters[i]);
-            }
+        if(letters.Length <= 2 || size <= 1){
+            // Console.WriteLine($"letters[0] letters[1]");
+            
         }
-    }
+        else {
+            
+            // (letters.Length * PermutationsChoose(letters, size)) / (letters.Length - size) * 
+        }
+    }
 
     /// <summary>
     /// #############
@@ -240,23 +230,20 @@ public static class RecursionTester {
     /// until the memoization is implemented.
     /// </summary>
     public static decimal CountWaysToClimb(int s, Dictionary<int, decimal>? remember = null) {
-        
-        if(remember == null)
-            remember = new Dictionary<int, decimal>();
         // Base Cases
-        if (s <= 0)
+        if (s == 0)
             return 0;
         if (s == 1)
             return 1;
-
-        if (remember.ContainsKey(s))
-            return remember[s];
+        if (s == 2)
+            return 2;
+        if (s == 3)
+            return 4;
 
         // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
-        remember[s] = ways;
-        return ways;
-    }
+        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        return ways;
+    }
 
     /// <summary>
     /// #############
