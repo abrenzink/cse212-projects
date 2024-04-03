@@ -147,8 +147,13 @@ public static class RecursionTester {
     /// </summary>
     public static int SumSquaresRecursive(int n) {
         // TODO Start Problem 1
-        return 0;
-    }
+        if (n <= 1){
+            return 1;
+        }
+        else {
+            return (n * n + SumSquaresRecursive(n - 1));
+        }
+    }
 
     /// <summary>
     /// #############
