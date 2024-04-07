@@ -8,7 +8,10 @@ public class Node {
     }
 
     public void Insert(int value) {
-        if (value < Data) {
+        if (value == Data){
+            Console.WriteLine($"Value {value} has not been added for it is already part of the BST.");
+        }
+        else if (value < Data) {
             // Insert to the left
             if (Left is null)
                 Left = new Node(value);
